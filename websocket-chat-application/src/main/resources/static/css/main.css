@@ -109,7 +109,7 @@ button.accent {
 }
 
 .username-page-container {
-    background: #fff;
+    background: #0000FF;
     box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
     border-radius: 2px;
     width: 100%;
@@ -294,5 +294,11 @@ button.accent {
 
     .chat-header h2 {
         font-size: 1.1em;
+    }
+
+    .horizontal-buttons {
+        display: flex;
+        gap: 10px; /* space between buttons */
+        justify-content: center; /* optional: centers buttons */
     }
 }
