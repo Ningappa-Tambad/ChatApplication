@@ -117,5 +117,41 @@ function getAvatarColor(messageSender) {
     return colors[index];
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+    const loginBtn = document.querySelector('.horizontal-buttons .username-login');
+    const usernamePage = document.getElementById('username-page');
+    const loginPage = document.getElementById('login-page');
+
+    loginBtn.addEventListener('click', function(event) {
+        usernamePage.classList.add('hidden');
+        loginPage.classList.remove('hidden');
+    });
+});
+
+document.getElementById('messageForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const messageInput = document.getElementById('message');
+    const message = messageInput.value.trim();
+
+    if (message.startsWith('@ai')) {
+        fetch('/api/ai/respond', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(message)
+        })
+            .then(response => response.text())
+            .then(aiReply => {
+                // Display AI reply in chat
+                const messageArea = document.getElementById('messageArea');
+                const li = document.createElement('li');
+                li.textContent = 'AI: ' + aiReply;
+                messageArea.appendChild(li);
+            });
+    } else {
+        // Existing logic to send message to group
+    }
+    messageInput.value = '';
+});
+
 usernameForm.addEventListener('submit', connect, true)
 messageForm.addEventListener('submit', sendMessage, true)
